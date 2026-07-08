@@ -78,32 +78,33 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
-
-# load_dotenv()
-# USER = os.getenv('MS_SQL_USER')
-# PASSWORD = os.getenv('MS_SQL_PASSWORD')
-# HOST = os.getenv('MS_SQL_SERVER')
-# DATABASE = os.getenv('MS_SQL_PAD_DATABASE')
-# DRIVER = os.getenv('MS_SQL_DRIVER')
-#
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'mssql',
-#         'NAME': DATABASE,
-#         'PASSWORD': PASSWORD,
-#         'HOST': HOST,
-#         'OPTIONS': {
-#             'driver': DRIVER
-#         }
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+
+
+load_dotenv()
+USER = os.getenv('MS_SQL_USER')
+PASSWORD = os.getenv('MS_SQL_PASSWORD')
+HOST = os.getenv('MS_SQL_SERVER')
+DATABASE = os.getenv('MS_SQL_DATABASE')
+DRIVER = os.getenv('MS_SQL_DRIVER')
+PAD_DATABASE = os.getenv('MS_SQL_PAD_DATABASE')
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'mssql',
+        'NAME': DATABASE,
+        'PASSWORD': PASSWORD,
+        'HOST': HOST,
+        'OPTIONS': {
+            'driver': DRIVER
+        }
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
