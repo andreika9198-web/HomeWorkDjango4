@@ -16,7 +16,7 @@ class Genre(models.Model):
 class Game(models.Model):
     name = models.CharField(max_length=250, verbose_name='game_name')
     genre = models.ForeignKey(Genre, on_delete=models.CASCADE, verbose_name='genre')
-    photo = models.ImageField(upload_to='games/', **NULLABLE)
+    photo = models.ImageField(upload_to='games/', **NULLABLE, verbose_name='photo')
     date_of_publication = models.DateField(**NULLABLE, verbose_name='date_of_publication')
 
     def __str__(self):
