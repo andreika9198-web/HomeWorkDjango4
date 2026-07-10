@@ -24,3 +24,10 @@ def genres_games_list(request, pk: int):
         'breed_pk': genre_item.pk
     }
     return render(request, 'games/games.html', context)
+
+def games_list_view(request):
+    context = {
+        'objects_list': Game.objects.all(),
+        'title': f'Все игры',
+    }
+    return render(request, 'games/games.html', context)
