@@ -1,6 +1,9 @@
 from django.shortcuts import render
+from django.http import  HttpResponseRedirect
+from  django.urls import reverse
 
 from  games.models import Genre, Game
+from  games.forms import GameForm
 
 def index(request):
     context = {
@@ -12,7 +15,7 @@ def index(request):
 def genres_list(request):
     context = {
         'objects_list': Genre.objects.all()[:3],
-        'title': 'Игры - Список жанров'
+        'title': 'Список жанров игр'
     }
     return render(request, 'games/genres.html', context)
 
@@ -31,3 +34,16 @@ def games_list_view(request):
         'title': f'Все игры',
     }
     return render(request, 'games/games.html', context)
+
+def game_create_view(request):
+    if request.method == 'POST':
+        form = GameForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('games:games_list'))
+    context = {
+        'title': 'Добавить игру',
+        'form': GameForm()
+    }
+    return render(request, 'games/create.html', context)
+

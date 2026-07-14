@@ -1,7 +1,7 @@
 from  django.urls import path
 
 
-from  games.views import  index, genres_list, genres_games_list, games_list_view
+from  games.views import  index, genres_list, genres_games_list, games_list_view, game_create_view
 from  games.apps import  GamesConfig
 
 app_name = GamesConfig.name
@@ -13,5 +13,6 @@ urlpatterns = [
     path('genres/<int:pk>/games/', genres_games_list, name='genres_games'),
 
     # games
-    path('games/', games_list_view, name='games_list')
+    path('games/', games_list_view, name='games_list'),
+    path('games/create/', game_create_view, name='game_create')
 ]
