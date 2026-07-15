@@ -45,7 +45,7 @@ def game_create_view(request):
         'title': 'Добавить игру',
         'form': GameForm()
     }
-    return render(request, 'games/create.html', context)
+    return render(request, 'games/create_update.html', context)
 
 def game_detail_view(request, pk):
     game_object = get_object_or_404(Game, pk=pk)
@@ -61,14 +61,14 @@ def game_update_view(request, pk):
         form = GameForm(request.POST, request.FILES, instance=game_object)
         if form.is_valid():
             game_object = form.save()
-            game_object.savw()
-            return HttpResponseRedirect(reverse('games:games_derail', args={pk:pk}))
+            game_object.save()
+            return HttpResponseRedirect(reverse('games:game_detail', args={pk:pk}))
     context = {
         'title': 'Изменить игру',
         'object': game_object,
-        'for': GameForm(instance=game_object)
+        'form': GameForm(instance=game_object)
     }
-    return render(request, 'game/update.html', context)
+    return render(request, 'games/create_update.html', context)
 
 
 def game_delete_view(request, pk):

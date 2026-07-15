@@ -1,10 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends 'games/base.html' %}
+{% load my_tags %}
+{% block content %}
+<form method="post" enctype="multipart/form-data" class="row justify-content-center">
+    <div class="col-6">
+        <div class="card">
+            <div class="card-header text-center">
+                {% if object %}
+                Вы уверены, что хотите удалить игру?
+                {% endif %}
+            </div>
+            <div class="card-body text-center">
+                <img class="card-img-top mx-auto d-block"
+                     src="{{ object.photo|games_media }}"
+                     alt="Card image cap"
+                     style="max-width: 300px; height: auto;">
+                <p class="card-text mt-3">{{ object }}</p>
+            </div>
+            {% csrf_token %}
+            <div class="text-center">
+                <button type="submit" class="btn btn-outline-danger">
+                    {% if object %}
+                    Удалить
+                    {% endif %}
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock %}
