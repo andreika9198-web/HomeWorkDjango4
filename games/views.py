@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import  HttpResponseRedirect
 from  django.urls import reverse
 
@@ -47,3 +47,37 @@ def game_create_view(request):
     }
     return render(request, 'games/create.html', context)
 
+def game_detail_view(request, pk):
+    game_object = get_object_or_404(Game, pk=pk)
+    context = {
+        'object': game_object,
+        'title': f'Вы выбрали {game_object}',
+    }
+    return  render(request, 'games/detail.html', context)
+
+def game_update_view(request, pk):
+    game_object = get_object_or_404(Game, pk=pk)
+    if request.method == 'POST':
+        form = GameForm(request.POST, request.FILES, instance=game_object)
+        if form.is_valid():
+            game_object = form.save()
+            game_object.savw()
+            return HttpResponseRedirect(reverse('games:games_derail', args={pk:pk}))
+    context = {
+        'title': 'Изменить игру',
+        'object': game_object,
+        'for': GameForm(instance=game_object)
+    }
+    return render(request, 'game/update.html', context)
+
+
+def game_delete_view(request, pk):
+    game_object = get_object_or_404(Game, pk=pk)
+    if request.method == 'POST':
+        game_object.delete()
+        return HttpResponseRedirect(reverse('games:games_list'))
+    context =  {
+        'title': 'Удалить игру',
+        'object': game_object,
+    }
+    return render(request, 'games:delete.html')
