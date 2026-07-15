@@ -80,4 +80,4 @@ def game_delete_view(request, pk):
         'title': 'Удалить игру',
         'object': game_object,
     }
-    return render(request, 'games:delete.html')
+    return render(request, 'games/delete.html', context)
