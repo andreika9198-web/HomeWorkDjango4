@@ -31,7 +31,7 @@
                         <li><a href="{% url 'games:games_list' %}" class="text-white">Игры</a></li>
                         <li><a href="{% url 'games:game_create' %}" class="text-white">Добавить игру</a></li>
                         {% if user.is_authenticated %}
-                        <li><a href="{% url 'users:user_register' %}" class="text-white">Профиль</a>
+                        <li><a href="{% url 'users:user_profile' %}" class="text-white">Профиль</a>
                         {% else %}
                         <li><a href="{% url 'users:user_login' %}" class="text-white">Вход</a>
                         <li><a href="{% url 'users:user_register' %}" class="text-white">Регистрация</a></li>
